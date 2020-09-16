@@ -105,7 +105,7 @@ async def analyze(request):
     img = open_image(BytesIO(img_bytes))
     img = img.resize(torch.Size([img.shape[0],224, 224]))#.data.half()
     #img = Image(img)
-    prediction = learn.to_32fp().predict(img)[0]
+    prediction = learn.to_fp32().predict(img)[0]
     if prediction == '1':
         prediction = 'YES'
     else:
