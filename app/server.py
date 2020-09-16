@@ -103,7 +103,7 @@ async def analyze(request):
     img_data = await request.form()
     img_bytes = await (img_data['file'].read())
     img = open_image(BytesIO(img_bytes))
-    img = img.resize(torch.Size([img.shape[0],224, 224]))
+    img = img.resize(torch.Size([img.shape[0],224, 224])).data.half()
     prediction = learn.predict(img)[0]
     if prediction == '1':
         prediction = 'YES'
