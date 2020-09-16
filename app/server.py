@@ -10,8 +10,8 @@ from starlette.responses import HTMLResponse, JSONResponse
 from starlette.staticfiles import StaticFiles
 
 #export_file_url = 'https://drive.google.com/file/d/1tFxujqMyii2hCEoaIOUJ-QJ2eryYimI2/view?usp=sharing'
-export_file_url = 'https://www.dropbox.com/s/dti32o8e82yc0ju/instagram.pth?dl=0'
-export_file_name = 'instagram.pth'
+export_file_url = 'https://www.dropbox.com/s/zim9d5cbrd8cxcu/instagram.pkl?dl=0'
+export_file_name = 'instagram.pkl'
 
 classes = ['NO', 'YES']
 path = Path(__file__).parent
