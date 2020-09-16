@@ -51,7 +51,10 @@ export_file_name = 'instagram.pkl'
 classes = ['NO', 'YES']
 path = Path(__file__).parent
 
-download_file_from_google_drive('1EhOJZM3hVmphfCGDQU3Ik1mjVKYSbllY', path / export_file_name)
+if os.path.exists(export_file_name):
+    pass
+else:
+    download_file_from_google_drive('1EhOJZM3hVmphfCGDQU3Ik1mjVKYSbllY', path / export_file_name)
 
 app = Starlette()
 app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_headers=['X-Requested-With', 'Content-Type'])
@@ -99,7 +102,7 @@ async def homepage(request):
 async def analyze(request):
     img_data = await request.form()
     img_bytes = await (img_data['file'].read())
-    img = open_image(BytesIO(img_bytes))
+    img = open_image(BytesIO(img_bytes)).resize((224,224))
     prediction = learn.predict(img)[0]
     return JSONResponse({'result': str(prediction)})
 
