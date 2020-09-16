@@ -9,7 +9,8 @@ from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import HTMLResponse, JSONResponse
 from starlette.staticfiles import StaticFiles
 
-export_file_url = 'https://drive.google.com/file/d/1tFxujqMyii2hCEoaIOUJ-QJ2eryYimI2/view?usp=sharing'
+#export_file_url = 'https://drive.google.com/file/d/1tFxujqMyii2hCEoaIOUJ-QJ2eryYimI2/view?usp=sharing'
+export_file_url = 'https://www.dropbox.com/s/dti32o8e82yc0ju/instagram.pth?dl=0'
 export_file_name = 'instagram.pkl'
 
 classes = ['NO', 'YES']
