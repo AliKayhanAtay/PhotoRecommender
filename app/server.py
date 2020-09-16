@@ -44,6 +44,8 @@ def save_response_content(response, destination):
 export_file_url = 'https://www.dropbox.com/s/zim9d5cbrd8cxcu/instagram.pkl?dl=0'
 export_file_name = 'instagram.pkl'
 
+download_file_from_google_drive('1EhOJZM3hVmphfCGDQU3Ik1mjVKYSbllY', path / export_file_name)
+
 classes = ['NO', 'YES']
 path = Path(__file__).parent
 
@@ -63,7 +65,7 @@ async def download_file(url, dest):
 
 async def setup_learner():
     #await download_file(export_file_url, path / export_file_name)
-    download_file_from_google_drive('1EhOJZM3hVmphfCGDQU3Ik1mjVKYSbllY', path / export_file_name)
+    #download_file_from_google_drive('1EhOJZM3hVmphfCGDQU3Ik1mjVKYSbllY', path / export_file_name)
 
     try:
         learn = load_learner(path, export_file_name)
