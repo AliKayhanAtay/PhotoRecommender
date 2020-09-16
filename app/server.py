@@ -75,7 +75,7 @@ async def setup_learner():
     #download_file_from_google_drive('1EhOJZM3hVmphfCGDQU3Ik1mjVKYSbllY', path / export_file_name)
 
     try:
-        learn = load_learner(path, export_file_name)
+        learn = load_learner(path, export_file_name).to_fp16()
         return learn
     except RuntimeError as e:
         if len(e.args) > 0 and 'CPU-only machine' in e.args[0]:
