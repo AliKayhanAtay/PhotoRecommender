@@ -40,7 +40,7 @@ def save_response_content(response, destination):
             print(index)
             if chunk: # filter out keep-alive new chunks
                 f.write(chunk)
-
+    print('Complete')
 
 #export_file_url = 'https://drive.google.com/file/d/1tFxujqMyii2hCEoaIOUJ-QJ2eryYimI2/view?usp=sharing'
 export_file_url = 'https://www.dropbox.com/s/zim9d5cbrd8cxcu/instagram.pkl?dl=0'
