@@ -9,6 +9,7 @@ from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import HTMLResponse, JSONResponse
 from starlette.staticfiles import StaticFiles
 import requests
+import os
 
 def download_file_from_google_drive(id, destination):
     URL = "https://docs.google.com/uc?export=download"
@@ -51,7 +52,7 @@ export_file_name = 'instagram.pkl'
 classes = ['NO', 'YES']
 path = Path(__file__).parent
 
-if os.path.exists(export_file_name):
+if os.path.exists(os.path.join(path,export_file_name)):
     pass
 else:
     download_file_from_google_drive('1EhOJZM3hVmphfCGDQU3Ik1mjVKYSbllY', path / export_file_name)
