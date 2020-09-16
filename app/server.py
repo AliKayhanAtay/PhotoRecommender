@@ -102,7 +102,8 @@ async def homepage(request):
 async def analyze(request):
     img_data = await request.form()
     img_bytes = await (img_data['file'].read())
-    img = open_image(BytesIO(img_bytes)).resize(224,224)
+    img = open_image(BytesIO(img_bytes))
+    img = img.resize(torch.Size([img.shape[0],224, 224]))
     prediction = learn.predict(img)[0]
     return JSONResponse({'result': str(prediction)})
 
