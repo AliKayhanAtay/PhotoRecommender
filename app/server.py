@@ -8,6 +8,37 @@ from starlette.applications import Starlette
 from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import HTMLResponse, JSONResponse
 from starlette.staticfiles import StaticFiles
+import requests
+
+def download_file_from_google_drive(id, destination):
+    URL = "https://docs.google.com/uc?export=download"
+
+    session = requests.Session()
+
+    response = session.get(URL, params = { 'id' : id }, stream = True)
+    token = get_confirm_token(response)
+
+    if token:
+        params = { 'id' : id, 'confirm' : token }
+        response = session.get(URL, params = params, stream = True)
+
+    save_response_content(response, destination)    
+
+def get_confirm_token(response):
+    for key, value in response.cookies.items():
+        if key.startswith('download_warning'):
+            return value
+
+    return None
+
+def save_response_content(response, destination):
+    CHUNK_SIZE = 32768
+
+    with open(destination, "wb") as f:
+        for chunk in response.iter_content(CHUNK_SIZE):
+            if chunk: # filter out keep-alive new chunks
+                f.write(chunk)
+
 
 #export_file_url = 'https://drive.google.com/file/d/1tFxujqMyii2hCEoaIOUJ-QJ2eryYimI2/view?usp=sharing'
 export_file_url = 'https://www.dropbox.com/s/zim9d5cbrd8cxcu/instagram.pkl?dl=0'
@@ -31,7 +62,9 @@ async def download_file(url, dest):
 
 
 async def setup_learner():
-    await download_file(export_file_url, path / export_file_name)
+    #await download_file(export_file_url, path / export_file_name)
+    download_file_from_google_drive('1EhOJZM3hVmphfCGDQU3Ik1mjVKYSbllY', path / export_file_name)
+
     try:
         learn = load_learner(path, export_file_name)
         return learn
