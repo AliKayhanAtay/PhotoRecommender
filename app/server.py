@@ -107,7 +107,7 @@ async def analyze(request):
     img = img.resize(torch.Size([img.shape[0],224, 224]))#.data.half()
     #img = Image(img)
     prediction = learn.to_fp32().predict(img)[0]
-
+    print(str(prediction))
     return JSONResponse({'result': str(prediction)})
 
 
