@@ -108,7 +108,13 @@ async def analyze(request):
     #img = Image(img)
     prediction = learn.to_fp32().predict(img)[0]
     print(str(prediction))
-    return JSONResponse({'result': str(prediction)})
+    
+    r = str(prediction)
+    if r == '1':
+        r = 'Cool Pic'
+    else:
+        r = 'Not Cool'
+    return JSONResponse({'result': r})
 
 
 if __name__ == '__main__':
